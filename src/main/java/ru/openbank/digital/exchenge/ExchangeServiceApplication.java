@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ExchengeSerivceApplication {
+public class ExchangeServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ExchengeSerivceApplication.class, args);
+		SpringApplication.run(ExchangeServiceApplication.class, args);
 	}
 }
