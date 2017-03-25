@@ -16,8 +16,9 @@ import org.springframework.web.context.request.async.DeferredResult;
 @RestController
 public class ExchangeController {
 
-    @Autowired
-    private LoanBrokerGateway loanBrokerGateway;
+//    @Autowired
+//    private LoanBrokerGateway loanBrokerGateway;
+
     private static final double BEST_QUOTE_VALUE = 0.04;
 
     @RequestMapping("/quotation")
@@ -29,22 +30,22 @@ public class ExchangeController {
             deferredResult.setErrorResult(ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body("Request timeout occurred."));
         });
 
-        ListenableFuture<Double> future = loanBrokerGateway.bestQuotation(loanAmount);
-        future.addCallback(new ListenableFutureCallback<Double>() {
-            @Override
-            public void onSuccess(Double result) {
-                // Double check response matches with request
-                if(result.equals(loanAmount * BEST_QUOTE_VALUE))
-                    deferredResult.setResult(ResponseEntity.ok(result));
-                else
-                    deferredResult.setErrorResult(ResponseEntity.status(HttpStatus.CONFLICT)
-                            .body("Invalid quotation "+result+" for loan amount "+loanAmount));
-            }
-            @Override
-            public void onFailure(Throwable t) {
-                deferredResult.setErrorResult(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(t));
-            }
-        });
+//        ListenableFuture<Double> future = loanBrokerGateway.bestQuotation(loanAmount);
+//        future.addCallback(new ListenableFutureCallback<Double>() {
+//            @Override
+//            public void onSuccess(Double result) {
+//                // Double check response matches with request
+//                if(result.equals(loanAmount * BEST_QUOTE_VALUE))
+//                    deferredResult.setResult(ResponseEntity.ok(result));
+//                else
+//                    deferredResult.setErrorResult(ResponseEntity.status(HttpStatus.CONFLICT)
+//                            .body("Invalid quotation "+result+" for loan amount "+loanAmount));
+//            }
+//            @Override
+//            public void onFailure(Throwable t) {
+//                deferredResult.setErrorResult(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(t));
+//            }
+//        });
         return deferredResult;
     }
 }
